@@ -1,0 +1,178 @@
+* {
+  margin: 0; /* Margin é a margem/espaçamento externo, esquerda, direita, cima e baixo do html geral*/
+  padding: 0; /* Padding é o espaçamento interno */
+  box-sizing: border-box; /* Respeitar os tamanhos da borda e não mudar errado */
+}
+
+:root{ /*Faz o root para determinar o padrão de fonte responsiva de todos os sites, para n precisar editar fonte a fonte, raiz do site.*/
+  font-size: 16px; /*tamanho padrao de fonte do site é de 16px em todas as resoluções - Utiliza 16x como referencia para ajustar as fontes de formas responsiva, de acordo com o tamanho da tela, usando como parametro. */
+}
+
+::-webkit-scrollbar{ /* edita a barra de scrow do nagevador */
+  width: 8px;  /* largura da barra */
+}
+
+::-webkit-scrollbar-track { /* Caminho que a barra de scrow percorre */
+  background-color: #2c2c31;
+}
+
+::-webkit-scrollbar-thumb{ /* Define a cor da barra, para gerar contraste, pedaço da barra que arrasta para baixo */
+  background-color: #9e9ea0;
+}
+
+@keyframes entering{ /*Chama o keyframe para fazer animações de 0 a 100%, igual a gif, mudando a cada % o frame e Entering é o nome que foi dado a animação. */
+  /* quando for usar quadro a quadro, usa de 0% a 100% no lugar do from e to */
+  /* quando for sair de um estado para outro usa from e to */
+  from {
+    opacity: 0;
+    transform: translateY(-200px); /* Manipula a posição do efeito na vertical, colocando o -200 negativo, vai para fora da tela e da efeito */
+  } 
+
+  to {
+    opacity: 1;
+    transform: translateY(0); /*Retorna a posição inicio, dando efeito de mexida na tela */
+  }
+
+
+
+ /* 0% {background-color: red;} /* Em 0% a cor da animação ficará vermelha. */
+ /* 30% {background-color: green;} /* Em 30% a cor da animação ficará verde. */
+ /* 78% {opacity: 0;} /* Em 78% a opacidade(visibildade) da animação ficará em 0% */
+ /* 100% {opacity: 1;} /* Em 100% a opacidade(visibildade) da animação ficará em 1% */
+}
+
+body {
+  background-color: #121215;
+  color: #eaeaea;
+
+  font-family: "Roboto", sans-serif; /* Adicionando uma fonte Roboto e o Sans-serif é uma segunda fonte, caso não tenha a Roboto no site navegador. */
+
+  display: grid; /* todos os elementos que estao dentro do body sao uma grid, dividos meio a meio a tela */
+  grid-template-areas: "profile timeline"; /* define as areas/nome da grid */
+  grid-template-columns: 1fr 1fr; /*Coloca as colunasda grid em tamanho flexivel, divindo ela metade meta 1fr a 1fr */
+  grid-template-rows: 100vh; /*coloca a altura da grid flexivel */
+}
+
+nav {
+  padding: 64px; /* Espaçamento, esquerda, direita, cima baixo da nav */
+  grid-area: timeline;
+
+  overflow-y: scroll; /*Quando o conteudo n couber na vertical, role o scroll enquanto o outro fica fixo */
+  animation: entering 0.7s ease-in-out; /*Chama a animação (entering) que foi criada em @Keyframes entering com o tempo de duração de 0.7segundos de dentro para fora */
+}
+
+.memory {
+  display: flex; /* Coloca tudo da classe memory como flexivel, indo um ao lado do outro */
+  flex-direction: column; /* Coloca o espaçamento das imagens um embaixo do outro */
+  gap: 16px; /* Determina o espaço entre um campo e outro */
+
+  text-decoration: none; /* Tira o _ debaixo do texto */
+  margin-bottom: 64px; /* Adiciona uma margim na parte de baixo */
+}
+
+.memory small {
+  color: #bebebf;
+  font-size: 0.75rem; /* rem é a unidade de medida para tamanhos de fontes responsivas, usando o tamanho da fonte do root de 16px como referencia
+  Se divir 12(tamanho do px dessa fonte com 16(tamanho da fonte determinada no root = 0.75, o tamanho dessa fonte em rem sera 0.75 para ficar responsivo. Será 75% do tamanho de 16px, da fonte padrao root para ficar resposnvio */
+}
+
+.memory h1 {
+  font-size: 2rem; /* 32px da fonte, dividido por 16px da fonte do root = 2. Sera 2% da fonte do root de 16px, tornando esta fonte responsiva para as outras telas */
+  color: #eaeaea;
+}
+
+.memory img {
+  width: 100%; /*width = largura da imagem acompanhando a tela */
+  height: 280px; /* altura = da imagem */
+  object-fit: cover; /* manter proporção de uma capa */
+  border-radius: 8px; /* Colocar borda com canto arredondado */
+
+  transition: transform 0.3s ease-in-out; /* Transicção sempre vai no elemento que reberá a trasnformação, no caso a foto e aplicar o efeito mais lendo ao passsar mouse com 0,3 segundos ease in out, começar animação mais lento e terminar mais rapido ao passar o mouse na imagem */
+
+}
+
+.memory:hover img{ /*Quando passar mouse em cima, selecionar o hover(espaço) da imagem. */
+  transform: scale(1.1); /*Faz quando passar um mouse, aumentar em 1.1 (10% de 1 a imagem/hover q está sendo seecionado */
+}
+
+.memory div { /*Chama a div que foi criada entre as imagens a> para mexer nela */
+  width: 100%; 
+  height: 280px;
+  overflow: hidden; /*ativa a rolagem e quando o conteúdo exeder e passar do campo, não mostra (faz a imagem n sair para fora) */
+  border-radius: 8px; /*adciona borda de 8px */
+}
+
+.memory p {
+  font-size: 1.2rem; /* Tamanho da fonte é 18px, mas a fonte padrao do root é 16px, 18 divido por 16 = 1.2, esta sera o tamanho da fonte em rem para ficar responsival, era 1,2% do tamanho da fonte do root de 16px. */
+  color: #bebebf; /* Cor da fonte */
+  line-height: 28px; /* Espaçamento de uma linha para outra */
+}
+
+aside {
+  grid-area: profile; /* detrminar que esse grid de asiede vai ser referente ao profile (esquerda) */
+  display: flex; /*determinar que a ordem vai ser de display flexivel */
+  flex-direction: column; /* determina que vai ser o display em forma de coluna (um em baixo do outro) */
+  align-items: center; /* determinar para a grid do aisde (profile) ficar centralizados na horizontal */
+  justify-content: center; /* determinar para a grid do aisde (profile) ficar centralizados agora no centro da vertical (meio da tela e centro) */
+  gap: 20px; /*serve para da espaço de um item ao outro */
+
+  border-right: 1px solid; /* faz uma borda do lado direito de 1x, sendo solida ( para dividir o profrile da timeline */
+  border-image: linear-gradient(#727275, #2c2c31) 1; /*Faz com que a borda comeece em um tom e vá trocando de cor e de tom mais a frente, com a grossura de 1 */
+
+  background-image: url("./assets/background.svg"); /* Adiciona uma imagem de fundo na aba aside, carregando a imagem por URL sendo SVG */
+  background-position: top right; /* faz com que a posição da imagem de fundo se alinhe em cima e na direita, fazendo que grude na borda */
+  background-repeat: no-repeat; /* Faz com que a imagem de fundo não se repita varias vezes, caso tenha espaço a mais. */
+  background-size: auto 100%; /* Faz com que a imagem de fundo se ajuste melhor na tela. */
+
+}
+
+aside *{ /* O * Faz com que todos os elementos do aside faça a animação (logo, imagem, text) */
+  animation: entering 0.7s ease-in-out; /*Chama a animação (entering) que foi criada em @Keyframes entering com o tempo de duração de 0.7segundos de dentro para fora na parte do profile da pagina */
+}
+
+aside img:nth-child(2) {
+  /* No aside tem as 2 imagem, perfil e fundo, com o nth-child(1 ou 2) e o numero dentro, vc determina qual imagem quer chamar para conseguir manipula-la */
+  width: 160px; /* largura da imagem na grid */
+  height: 160px; /* altura da imagem na grid */
+  border-radius: 50%; /*deixa a borda redonda (quando o arredondamento é metade da altura e largura, faz esse efeito de borda redonda */
+  border: 4px solid transparent; /* Coloca a borda da foto na grossura de 4px, no formado solido e transparente */
+
+  background: linear-gradient(#d39e33, #ed5636, #633bbc) padding-box,
+    linear-gradient(260deg, #d39e33, #ed5636, #633bbc) border-box;
+  /* Coloca uma cor de fundo na borda com o efeito de várias cores */
+}
+
+aside p {
+  font-size: 2rem; /* Determina o tamanho da fonte do paragrafo (capsula do tempo e Lucas Silva) que está dentro da grid aside, sendo a fonte no tamanho de 32px, divindo 32 com 16px do tamanho da fonte padrao geral do root, que ficará 2rem, sendo 2% de 16px padrao do root. Fazendo esta fonte ficar responsiva  */
+  text-align: center; /*centraliza o texto */
+}
+
+aside span {
+  font-size: 0.75rem; /* Determina o tamanho da fonte do span (feito com amor) que está dentro da grid aside, pegando 12px da fonte e divindo por 16px da fonte root geral, da 0.75rem, que é 0.75% da fonte root de 16px. Tornando o site com esta fonte span responsiva. */
+  color: #9e9ea0; /*cor do texto do span */
+}
+
+@media (max-width: 768px){ /*Quando o site estiver em uma tela com uma largura maxima de ate 768px oq vai prevalecer é oq estiver aplicado aqui dentro para quando estiver em tela menor,deixando responsivel para essa tela de 768px. */
+  :root {
+    font-size: 14px; /*Quando a tela for menor, ira para 14x de todas as fontes, automaticamente. */
+  }
+  
+  body { /*Chama body, pois o grid está dentro dele, que o grid está dividindo a tela no meio em profile/time, na metade */
+    grid-template-columns: 1fr; /* 1 coluna com pegando toda 1 fraÇão na tela */
+    grid-template-rows: 0.2fr 0.8; /* 20% da fração e os outros 80% da fração da tela disponível */
+    grid-template-areas: /*Coloca as areas da grid, como profile em cima e timeline em baixo, na hora da visualização para resoluação menor  */
+      "profile"
+      "timeline";
+  }
+
+  aside{
+    border-right: none; /* Tira a borda do lado direito, pois quando a tela estivert menor, n ha necessidade d borda */
+    padding: 32px 12px; /*determinar o espaçamannto 32 para cima e baixo ew 12 aos lados */
+  }
+
+  nav{ /*Chama a nav, pois é aonde definiu o scrow */
+    overflow-y: visible; /*deixa o scrow padrao, para scrowlar a pagina inteira e não só a metade, como é no site grande */
+    padding: 22px; /*diminui o padding(espaço) da lateral da tela (esquerda e direita) */
+  }
+
+}
